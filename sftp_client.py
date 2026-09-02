@@ -24,8 +24,9 @@ class CustomSSHClient(paramiko.SSHClient):
 
 
 # Start of custom SFTP client for file transfer. 
-# Need to implement the checking of bytes in a filepath on 
-# remote server for resuming connections.
+# Need to implement re-establish connection functionality
+# which checks the bytes already on server at a given filepath
+# to enable resuming failed transfers.
 class CustomSFTPClient(paramiko.SFTPClient):
     """
     Custom SFTP Client class, which adds chunk_size parameter to 
