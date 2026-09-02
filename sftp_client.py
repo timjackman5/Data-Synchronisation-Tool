@@ -5,7 +5,9 @@ from csp import call_dst
 
 
 # Implement the custom transport and ssh to ensure that the custom 
-# SFTP client is instantiated from the SSH class
+# SFTP client is instantiated from the SSH class correctly
+# As current: Custom SSH client needs new connect function 
+# override to setup custom Transport.
 class CustomTransport(paramiko.Transport):
     def open_sftp_client(self):
         return CustomSFTPClient.from_transport(self)
@@ -14,6 +16,16 @@ class CustomSSHClient(paramiko.SSHClient):
     def open_sftp(self):
         return self._transport.open_sftp_client()
 
+    # def connect():
+    #     """
+    #     Implement custom connect with custom transport 
+    #     to use Custom SFTP class
+    #     """
+
+
+# Start of custom SFTP client for file transfer. 
+# Need to implement the checking of bytes in a filepath on 
+# remote server for resuming connections.
 class CustomSFTPClient(paramiko.SFTPClient):
     """
     Custom SFTP Client class, which adds chunk_size parameter to 
@@ -47,8 +59,6 @@ class CustomSFTPClient(paramiko.SFTPClient):
         """
         https://github.com/paramiko/paramiko/blob/main/paramiko/sftp_client.py#L687
         .. versionadded:: 1.10
-
-
         """
         with self.file(remotepath, "wb") as fr:
             # set pipelined to false, while it may decrease the speed it ensures all chunks are received. 
@@ -83,6 +93,9 @@ class CustomSFTPClient(paramiko.SFTPClient):
 
 def progress_callback(x, y):
     """
+    Used to track current bytes transferred and total bytes to transfer
+    per file.
+
     https://github.com/paramiko/paramiko/blob/main/tests/test_sftp.py#L547
     """
     return (x, y)
@@ -90,8 +103,8 @@ def progress_callback(x, y):
 
 def initialise_sftp_connection(hostname, username, password, port=22):
     """
-    Initialises a connection to a SFTP server with given hostname,
-    username and password
+    Initialises a connection to an SSH server with given hostname,
+    username and password, and sets up an SFTP session.
 
     https://sftpcloud.io/learn/python/paramiko-sftp-examples
     """
@@ -136,28 +149,27 @@ def close_sftp_connection(sftp, ssh):
 def transfer_files(sftp, files_and_hashes):
     """
     Given an sftp connection, and a list of files and their hashes
-
     Transfers the files to the remote server over SFTP connection. 
 
     Params:
         sftp connection, 
-        
+        output from csp.py, list of relevant filepaths to transfer, 
+        their hashes and timestamp.
 
     Returns:
-        o
-
+        Success if all files are transferred to the server.
     """
-    for directory in files_and_hashes:
-        print(f"directory: {directory}")
-
-    # for hash, filepath in files_and_hashes:
-    #     print(f"hash {hash}")
-    #     print(f"filepath {filepath}")
+    # for directory in files_and_hashes:
+    #     print(f"directory: {directory}")
 
     pass
 
 
 def run_transfer(files, hostname, username, password):
+    """
+    Given the output from csp.py, and details for SSH connection, 
+    connects and transfers files.
+    """
 
     hostname, username, password = '', '', ''
 
@@ -181,9 +193,13 @@ def run_transfer(files, hostname, username, password):
 def main():
 
     print("in main")
-    files, hostname, username, password = '', '', '', ''
+    # setup ssh connection details
+    hostname, username, password = '', '', '', ''
 
+    # get output from csp.py
+    files = ''
 
+    # run transfer to remote server 
     run_transfer(files, hostname, username, password)
 
 
