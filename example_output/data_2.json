@@ -1,0 +1,14 @@
+{
+    "last_sync": 1788329544.423697,
+    "increment": 2,
+    "prepped_files": {
+        "from_two": [],
+        "from": [],
+        "from_two/another": [
+            {
+                "filepath": "from_two/another/another_file.txt",
+                "hash": "8b2408b8875f81ee95acf8422e6e5892ec43e3b27bda00090c859e17778e03b3"
+            }
+        ]
+    }
+}

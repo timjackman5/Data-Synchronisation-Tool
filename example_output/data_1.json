@@ -1,0 +1,44 @@
+{
+    "last_sync": 1788329520.969942,
+    "increment": 1,
+    "prepped_files": {
+        "from": [
+            {
+                "filepath": "from/short_text_file.txt",
+                "hash": "df8a0aecf127cb0ff7f742a694cafd38567a9c13d3fffb43e2e7f9a471378d7f"
+            },
+            {
+                "filepath": "from/more/stuff/extra_text.txt",
+                "hash": "8827b49a28c88b496b2bc072ace4e749ab0d0f128dc53c9c45243a48e8e7b94d"
+            },
+            {
+                "filepath": "from/more/stuff/markdown_file.md",
+                "hash": "9a259530a2f37899a9e3b3a15df5d65d314f9553b61205062a9556fa873e4083"
+            },
+            {
+                "filepath": "from/more/text_file.txt",
+                "hash": "5edd870e1f66e51d03e6fefb8a37e44373def8099035f425d01c3b5df2352e33"
+            }
+        ],
+        "from_two/another": [
+            {
+                "filepath": "from_two/another/additional_file.txt",
+                "hash": "9137392730cc5501349aedd6a02200f3f155efd72df6fecbd5481f1de29e5533"
+            },
+            {
+                "filepath": "from_two/another/another_file.txt",
+                "hash": "3d407ddb51ac5dd2646f1ff3cbfee750361f75a4453a4afd359555aa7588c837"
+            }
+        ],
+        "from_two": [
+            {
+                "filepath": "from_two/just_a_file.txt",
+                "hash": "07ee70070f7878422bbe3e54346401ecbec4b65869ef57ca96e8b554dd425300"
+            },
+            {
+                "filepath": "from_two/this_one/file_in_this_one.txt",
+                "hash": "c71ac1591783ec4071b30e8875285c49776ca8419a373091732f7d61dd2d69b0"
+            }
+        ]
+    }
+}
