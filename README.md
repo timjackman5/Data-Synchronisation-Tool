@@ -1,4 +1,4 @@
-# DST
+# Data Synchronisation Tool
 The `csp.py` Python script takes a set of directories as line seperated entries in a text file, will iterate through them and create a list of all filepaths for files that have been edited / created since the last successful run, the hashes of those files and a timestamp for successful synchronisation.
 
 The `sftp_client.py` script starts the implementation of a custom SFTP client class using the Python Paramiko library as the base. This is incomplete, but has the base classing as a start for the implementation.
